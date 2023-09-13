@@ -1,0 +1,17 @@
+
+.card-container{
+    display:flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+   
+}
+
+.card{
+    width:18rem;
+    margin: 15px;
+    background-color: bisque;
+}
+
+.search-box{
+    margin: 15px;
+}

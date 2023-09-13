@@ -1,6 +1,8 @@
 import React from 'react'
 import Layout from '../pageLayout/layout'
 import './dashboard.css'
+import PageLayout from '../pageLayout/PageLayout'
+import { useNavigate } from 'react-router-dom'
 /*
 no.of.books
 no.of.books.borrowed
@@ -8,12 +10,21 @@ no.of.books.pending
 no.of.members
 */
 const Dashboard = () => {
+  const navigate = useNavigate()
+
+  function gotoMembers(){
+        navigate('/member')
+  }
+
+  function gotoBookList(){
+    navigate('/book_list')
+}
   return (
-    <Layout>
+    <PageLayout>
 
-     <div className='dashboard_cards'>
+     <div className='dashboard_cards' style={{zIndex:'1'}}>
 
-     <div className="card  " style={{width: "18rem"}}>
+     <div className="card  " style={{width: "18rem"}} onClick={gotoBookList} >
         <img src="https://imgs.6sqft.com/wp-content/uploads/2016/10/14160508/nypl-book-stacks1.jpg" className="card-img-top" alt="" />
           <div className="card-body">
             <p className="card-text">TOTAL NUMBER OF BOOKS AVAILABLE</p>
@@ -35,7 +46,7 @@ const Dashboard = () => {
           </div>
       </div>
 
-      <div className="card " style={{width: "18rem"}}>
+      <div className="card " style={{width: "18rem"}} onClick={gotoMembers}>
         <img src="https://th.bing.com/th/id/R.5cae91549f11d109d339ad086dc7347c?rik=KPCqkBRNFDtrpQ&riu=http%3a%2f%2fwww.melbourne.vic.gov.au%2fSiteCollectionImages%2flibrary-membership-card.jpg&ehk=jTESnHeE5NrwZ9EbLAH9MfZGGj9NEYkM9QZuEARm4jg%3d&risl=&pid=ImgRaw&r=0" className="card-img-top" alt="" />
           <div className="card-body">
             <p className="card-text">TOTAL MEMBERS</p>
@@ -45,7 +56,7 @@ const Dashboard = () => {
      </div>
 
 
-    </Layout>
+    </PageLayout>
   )
 }
 

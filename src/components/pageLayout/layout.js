@@ -1,5 +1,6 @@
 import React from 'react';
 import './layout.css'
+import Navigation from '../navbar/Navigation';
 
 
 const Layout = ({children}) => {
@@ -7,19 +8,12 @@ const Layout = ({children}) => {
     <div className='layout'>
 
         <div className='row'>
-        <header className='header  col-12'>
+        <header className='header col-12'>
             <h1>UNIVERSAL LIBRARY</h1>
         </header>
         </div>
 
-        <div className='row'>
-        <div className='navbar  col-12'>
-              <button>HOME</button>
-              <button>BOOKS</button>
-              <button>MEMBERS</button>
-              <button>CONTACT US</button>
-        </div>
-        </div>
+        <Navigation />
 
         <div className='content'>
             {children}

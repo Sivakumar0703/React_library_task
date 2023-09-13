@@ -9,3 +9,7 @@
 .card > img{
     height:200px;
 }
+
+.card{
+    cursor: pointer;
+}

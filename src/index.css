@@ -1,13 +1,58 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+.content{
+  min-height:calc(100vh - 5vh);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.row {
+  --bs-gutter-x: 0rem;
+   --bs-gutter-y: 0;
 }
+
+/* .sticky-footer{
+  position: sticky;
+  top:100%;
+  background-color: gray;
+  /* display: flex;
+  justify-content: center;
+  align-items:space-between; 
+} */
+
+html{
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body{
+  position: relative;
+  margin: 0;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.sticky-footer{
+  background-color: aquamarine;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  left:0;
+  bottom:0;
+  padding: 10px;
+  display: flex;
+  justify-content:space-evenly;
+  align-items: center;
+}
+
+@media (max-width: 991px) { 
+  .navbar-collapse{
+    background-color: black !important;
+  }
+  
+   .nav-link{
+    color:White !important;
+    padding:15px !important;
+  }
+ }
+
+
+/* https://stackoverflow.com/questions/1287439/ie7-z-index-layering-issues */
+/* https://stackoverflow.com/questions/16149701/bootstrap-dropdowns-menus-appearing-behind-other-elements-ie7 */

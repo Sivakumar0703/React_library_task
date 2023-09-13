@@ -76,17 +76,19 @@ const Members = () => {
 
 
 
-            let edit =  memberDetail.find((mem) => mem.id === editId)
-         console.log(edit);
-/*
+    // ?. is an optional chaining. we get data only when edit is clicked until the it holds undefined so it throws an error in useeffect.To
+    // avoid it we use optional chaining => it's like if you have a data in edit then go for edit.name        
+
          useEffect(()=>{
-            setName(edit.name),
-            setAge(edit.age),
-            setBorrowed(edit.borrowed),
-            setBooks(edit.books),
-            setLastVisit(edit.lastvisit),
-            setContact(edit.contact)
-        }) */
+            let edit =  memberDetail.find((mem) => mem.id === editId)
+            console.log(edit);
+            setName(edit?.name);
+            setAge(edit?.age);
+            setBorrowed(edit?.borrowed);
+            setBooks(edit?.books);
+            setLastVisit(edit?.lastvisit);
+            setContact(edit?.contact);
+        },[editId]) 
 
        
        
@@ -98,7 +100,7 @@ const Members = () => {
    
 
     const update = async() => {
-          // let findUpdateMember = memberDetail.findIndex(mem => mem.id === editId);
+           let findUpdateMember = memberDetail.findIndex(mem => mem.id === editId);
            const updateDetail = {
             name,
             age,
@@ -108,7 +110,7 @@ const Members = () => {
             contact
            }
 console.log(updateDetail)
-/*
+
            try {
             let response = await fetch('https://64481e647bb84f5a3e52e498.mockapi.io/members',{
                 method:"PUT",
@@ -124,7 +126,7 @@ console.log(updateDetail)
 
            } catch(error) {
             console.log(error)
-           } */
+           } 
     }
 
 
@@ -168,8 +170,9 @@ console.log(updateDetail)
                                     item.id === editId ?
                                     <StyledTableRow>
                                         
-                                        
-                                        <StyledTableCell><input type="text" defaultValue={item.name} onChange={e => setName(e.target.value) }/></StyledTableCell>
+                                    
+                                        <StyledTableCell><input type="text"  value={item.id} /></StyledTableCell>
+                                        <StyledTableCell><input type="text" Value={item.name} onChange={e => setName(e.target.value) }/></StyledTableCell>
                                         <StyledTableCell><input type="text" defaultValue={item.age} onChange={e => setAge(e.target.value) }/></StyledTableCell>
                                         <StyledTableCell><input type="text" defaultValue={item.borrowed} onChange={e => setBorrowed(e.target.value) }/></StyledTableCell>
                                         <StyledTableCell><input type="text" defaultValue={item.books} onChange={e => setBooks(e.target.value) }/></StyledTableCell>
