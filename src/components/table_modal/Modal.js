@@ -11,22 +11,6 @@ const Modal = (data) => {
         data.age = age
         data.mobile = mobile
         console.log("updated", data)
-        // try {
-        //     const response = await fetch(`https://64f036cc8a8b66ecf7794817.mockapi.io/members/${id}`, {
-        //         method: "PUT",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-
-        //         body: JSON.stringify(member)
-        //     })
-        //     let data = await response.json()
-        //     console.log("updated on db", data)
-        //     setMember(data)
-
-        // } catch (error) {
-        //     console.log("error in finding member", error)
-        // }
     }
 
 

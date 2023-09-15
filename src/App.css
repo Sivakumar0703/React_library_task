@@ -1,5 +1,35 @@
-*{
-  padding:0;
-  margin:0;
+* {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
+}
+
+.book_status {
+  background-image: url('./routes/statusBG.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+td,
+thead th {
+  text-align: center;
+}
+
+.header{
+  background-color: blueviolet;
+}
+
+.row {
+  --bs-gutter-x: 0rem !important;
+  --bs-gutter-y: 0 !important;
+  margin-top: 0 !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+.error-msg {
+  height: 30px;
+  margin-bottom: 0;
+  text-align: center;
 }

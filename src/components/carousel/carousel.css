@@ -1,0 +1,22 @@
+
+.sliding-img{
+    height:45vh; 
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+ }
+ 
+ .sliding-img > img {
+     height:100%;
+     width:100%;
+     object-fit: cover;
+ }
+ 
+ .carousel{
+     background-color: black;
+ }
+ 
+ .caption{
+     color:White;
+ }
