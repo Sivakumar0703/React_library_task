@@ -11,14 +11,14 @@ const Carousell = () => {
                     <div className='sliding-img'>
                         <img
                             className="d-block w-80 "
-                            src={require('./library.jpg')}
+                            src={require('./library-pic.jpg')}
                             alt="First slide"
                         />
                     </div>
                     <Carousel.Caption>
-                        <h1 className='caption'>S.R.RANGANATHAN</h1>
-                        <p>Father of Indian Library Science</p>
-                        <p>His birthday is observed as <span style={{ color: 'red', backgroundColor: 'black' }}>NATIONAL LIBRARY DAY</span></p>
+                        <h1 className='caption' style={{color:'#0066FF'}}>S.R.RANGANATHAN</h1>
+                        <p style={{color:'black'}}>Father of Indian Library Science</p>
+                        <p style={{color:'black'}}>His birthday is observed as <span style={{ color: 'red', backgroundColor: 'black' }}>NATIONAL LIBRARY DAY</span></p>
                     </Carousel.Caption>
                 </Carousel.Item>
 

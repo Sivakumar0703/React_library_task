@@ -34,7 +34,7 @@ const AddNew = () => {
     validationSchema: registerSchemaValidation,
     onSubmit: (newuser) => {
       addMember(newuser)
-      console.log(newuser)
+
       toast.success("Registeration Successful")
       navigate('/')
     }
@@ -58,9 +58,9 @@ const AddNew = () => {
         body: JSON.stringify(member)
       })
       let data = await response.json();
-      console.log(data, "new member")
+
     } catch (error) {
-      console.log("adding new user", error)
+      toast.error("Adding new user")
     }
   }
 

@@ -15,10 +15,9 @@ const BookStatus = () => {
 
                 let data = await response.json();
                 setBooks(data);
-                console.log(data)
 
             } catch (error) {
-                console.log(error);
+               alert('Error in fetching books data');
             }
         }
 

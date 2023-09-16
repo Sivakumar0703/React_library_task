@@ -10,7 +10,6 @@ const Modal = (data) => {
         data.name = name
         data.age = age
         data.mobile = mobile
-        console.log("updated", data)
     }
 
 

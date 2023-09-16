@@ -23,15 +23,17 @@ const BookList = () => {
 
                 let data = await response.json();
                 setBooks(data);
-                console.log(data)
+               
             } catch (error) {
-                console.log(error);
+                toast.error('Error in Fetching books data');
             }
         }
 
         memberData();
 
     }, [trigger]);
+
+
 
     async function deleteBook(id) {
         try {
@@ -73,17 +75,11 @@ const BookList = () => {
                                 .map((i) => {
                                     return (
 
-                                        <div className="card">
+                                        <div className="card" key={i.name}>
                                             <img className="card-img-top" src={require("../routes/bookImage.jpeg")} alt="books" />
                                             <div className="card-body">
                                                 <h5 className="card-title">{i.name.toUpperCase()}</h5>
                                                 <p>Author: {i.author}</p>
-
-                                                {/* {
-                                        i.status ? (<button className='btn btn-success'>Available</button>) : (<button className='btn btn-danger'>N/A</button>)
-                                    }
-
-                                    <button className='btn btn-danger m-2' onClick={()=>deleteBook(i.id)}><DeleteIcon/></button> */}
 
                                             </div>
                                             <div className='card-footer'>
@@ -100,7 +96,7 @@ const BookList = () => {
                                 )
 
                         ) : (
-                            <p>loading...</p>
+                            <p>Loading...</p>
                         )
                     }
 

@@ -30,9 +30,9 @@ const Member = () => {
         updateData.name = name
         updateData.age = age
         updateData.mobile = mobile
-        // console.log("updated", updateData)
+
         const id = updateData.id
-        console.log("member", member)
+
         try {
             const response = await fetch(`https://64f036cc8a8b66ecf7794817.mockapi.io/members/${id}`, {
                 method: "PUT",
@@ -43,11 +43,10 @@ const Member = () => {
                 body: JSON.stringify(updateData)
             })
             let data = await response.json()
-            console.log("updated on db", data)
-            console.log("member", member)
+
             setTrigger(!trigger)
         } catch (error) {
-            console.log("error in finding member", error)
+            toast.error("Error in finding member")
         }
     }
 
@@ -86,9 +85,9 @@ const Member = () => {
 
                 let data = await response.json();
                 setMember(data);
-                console.log(data)
+               
             } catch (error) {
-                console.log(error);
+                toast.error('Error in fetching members data');
             }
         }
 
@@ -153,7 +152,6 @@ const Member = () => {
                                                 <td>{item.borrowed_books?.length}</td>
                                                 <td>{item.borrowed_books.map((i, index) => {
                                                     return index + 1 + ") " + i.book.toUpperCase() + " "
-                                                    // return index + 1 + ") " + i + " "
                                                 })}</td>
                                                 <td>{item.last_visit}</td>
                                                 <td><button className='btn btn-success' onClick={() => getUserId(item.id)}>+ / -</button></td>
@@ -164,9 +162,9 @@ const Member = () => {
                                         )
                                     })}
 
-
                                 </tbody>
                             </Table>) : "Loading..."}
+
 
                     {/* modal to update member data */}
 
@@ -192,9 +190,6 @@ const Member = () => {
                             </div>
                         </div>
                     </div>
-
-
-
 
                 </div>
             </div>

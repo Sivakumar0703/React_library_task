@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import { Table } from 'react-bootstrap'
 import "../App.css"
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const Penalty = () => {
 
@@ -34,7 +35,6 @@ const Penalty = () => {
         }
 
         const data = members.filter((i) => i.id === memberId)
-        console.log(data)
         setUser(...data)
         setTotal([])
 
@@ -43,7 +43,6 @@ const Penalty = () => {
 
 
     async function payment(user) {
-        console.log(user)
         localStorage.setItem('userId', JSON.stringify(user.id))
         navigate('/return_books')
     }
@@ -57,29 +56,27 @@ const Penalty = () => {
                 })
 
                 let data = await response.json()
-                console.log("members", data)
                 setMembers(data)
 
 
             } catch (error) {
-                console.log("error in fetching available books", error)
+                toast.error("Error in fetching available books")
             }
         }
         getMember()
 
     }, [])
+
+
     return (
         <div>
             <PageLayout>
 
 
                 <div>
-                    <input placeholder='Enter Member ID' value={memberId} onChange={e => setMemberId(e.target.value)} />
-                    {/* <button onClick={getMember}>show detail</button> */}
+                    <input placeholder='Enter Member ID' style={{marginLeft:'10px'}} value={memberId} onChange={e => setMemberId(e.target.value)} />
                 </div>
-
-
-
+                <br />
 
                 {
                     members ? (
@@ -153,7 +150,7 @@ const Penalty = () => {
                         </Table>
 
                     ) : (
-                        " "
+                        "Loading... "
                     )
                 }
 

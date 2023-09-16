@@ -4,8 +4,10 @@ import "../members/members.css"
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import dayjs from 'dayjs';
 import { Autocomplete, TextField } from '@mui/material';
-import { useLocation } from "react-router-dom";
 import PageLayout from '../pageLayout/PageLayout';
+import { toast } from 'react-toastify';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 const ReturnBook = () => {
 
@@ -13,7 +15,6 @@ const ReturnBook = () => {
     console.log(val, 'val')
 
     const [id, setId] = useState(val);
-    // const [addBooks, setAddBooks] = useState([]) // books that are to be added in member account
     const [member, setMember] = useState({})
     const [showTable, setShowTable] = useState(false);
     const [booksAvailable, setBooksAvailable] = useState([]) // storing data taken from db
@@ -29,7 +30,6 @@ const ReturnBook = () => {
 
     function handleSelect(e, selected) {
         if (selected !== null) {
-            console.log(selected, 'set select')
             return setSelectedBook(selected)
         }
     }
@@ -38,7 +38,6 @@ const ReturnBook = () => {
 
     function getBookList() {
         const inStock = booksAvailable.filter((item) => item.status === true)
-        console.log(inStock, "in stock", availableBooks)
     }
 
 
@@ -52,11 +51,10 @@ const ReturnBook = () => {
                 method: "GET"
             })
             let data = await response.json()
-            console.log(data)
             setMember(data)
             setShowTable(true)
         } catch (error) {
-            console.log("error in finding member", error)
+            toast.error('Error in Finding Member')
         }
     }
 
@@ -64,8 +62,7 @@ const ReturnBook = () => {
     // update member borrowed book detail
     async function update(book, index) {
         const updated_bookList = member.borrowed_books?.splice(index, 1)
-        // console.log("removed :", updated_bookList, "remains :", member)
-        console.log(book, 'book del')
+
         try {
             const response = await fetch(`https://64f036cc8a8b66ecf7794817.mockapi.io/members/${id}`, {
                 method: "PUT",
@@ -76,7 +73,6 @@ const ReturnBook = () => {
                 body: JSON.stringify(member)
             })
             let data = await response.json()
-            console.log("updated on db", data)
             setMember(data)
 
             // to change the status of book
@@ -94,11 +90,11 @@ const ReturnBook = () => {
 
                 setRender(!render)
             } catch (error) {
-                console.log("error in changing the status of changing book status")
+                toast.error('Error in changing the status of changing book status')
             }
 
         } catch (error) {
-            console.log("error in finding member", error)
+            toast.error('Error in Finding Member')
         }
     }
 
@@ -108,8 +104,6 @@ const ReturnBook = () => {
         const updated_bookList = member.borrowed_books?.push(newObj)
         member.last_visit = today;
 
-        console.log("new book :", updated_bookList, "remains :", member, newObj)
-        console.log('add book function', selectedBook, typeof (selectedBook))
 
         try {
             const response = await fetch(`https://64f036cc8a8b66ecf7794817.mockapi.io/members/${id}`, {
@@ -121,7 +115,6 @@ const ReturnBook = () => {
                 body: JSON.stringify(member)
             })
             let data = await response.json()
-            console.log("updated on db", data)
             setMember(data)
 
             // to change the status of book
@@ -139,10 +132,10 @@ const ReturnBook = () => {
                 setSelectedBook(null)
                 setRender(!render)
             } catch (error) {
-                console.log("error in changing the status of changing book status")
+                toast.error("Error in changing the status of changing book status")
             }
         } catch (error) {
-            console.log("error in finding member", error)
+            toast.error("Error in finding member")
         }
     }
 
@@ -163,7 +156,6 @@ const ReturnBook = () => {
                 })
 
                 let data = await response.json()
-                console.log("avilable books", data)
                 setBooksAvailable(data)
                 let available = data.filter((book) => book.status === true)
 
@@ -171,11 +163,8 @@ const ReturnBook = () => {
 
                 setAvailableBookName(available.map((i) => (i.name)))
 
-
-                console.log(available, "use effect", availableBooks)
-
             } catch (error) {
-                console.log("error in fetching available books", error)
+                toast.error("Error in fetching available books")
             }
         }
         getBooks()
@@ -192,16 +181,11 @@ const ReturnBook = () => {
 
                 <div style={{ backgroundColor: 'yellowgreen' }}>
 
-
-
-
-
                     {showTable ? (
                         <>
 
                             <div>
-                                <button className='btn btn-success' data-toggle="modal" data-target="#exampleModalCenter" type="button" onClick={getBookList}>+ <MenuBookIcon /></button>
-
+                               
                                 {/* modal */}
                                 <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div className="modal-dialog modal-dialog-centered" role="document">
@@ -242,11 +226,15 @@ const ReturnBook = () => {
                             <Table striped bordered hover>
                                 <thead>
                                     <tr>
-                                        <th colSpan={3} style={{ textAlign: 'center', color: 'red' }}>{member.name?.toUpperCase()}</th>
+                                        <th colSpan={3} style={{ textAlign: 'center', color: 'red' }}>
+                                            {member.name?.toUpperCase()}
+                                            <button className='btn btn-success' data-toggle="modal" data-target="#exampleModalCenter" type="button" onClick={getBookList} style={{margin:'5px'}}>+ <MenuBookIcon /></button>
+
+                                        </th>
                                     </tr>
                                     <tr>
                                         <th>SI.NO</th>
-                                        <th>book</th>
+                                        <th>Book</th>
                                         <th>Return</th>
                                     </tr>
                                 </thead>
@@ -260,8 +248,8 @@ const ReturnBook = () => {
 
                                                 <tr key={i.book + i.date + index}>
                                                     <td>{index + 1}</td>
-                                                    <td>{i.book}</td>
-                                                    <td> <button onClick={() => update(i, index)}>delete</button>  </td>
+                                                    <td>{i.book.toUpperCase()}</td>
+                                                    <td> <button className='btn btn-danger' onClick={() => update(i, index)}><DeleteIcon/></button>  </td>
                                                 </tr>
                                             )
                                         })
@@ -271,13 +259,10 @@ const ReturnBook = () => {
                         </>
 
                     ) : (
-                        ''
+                        'Loading...'
                     )
 
                     }
-
-
-
 
                 </div>
             </div>
