@@ -4,11 +4,16 @@
   box-sizing: border-box;
 }
 
-.book_status {
+.book_status,
+.book_lists {
   background-image: url('./routes/statusBG.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
+}
+
+.container-fluid {
+  --bs-gutter-x: 0rem !important;
 }
 
 td,
@@ -16,7 +21,7 @@ thead th {
   text-align: center;
 }
 
-.header{
+.header {
   background-color: blueviolet;
 }
 

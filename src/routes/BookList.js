@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 const BookList = () => {
 
     const [books, setBooks] = useState([])
-    const [search , setSearch] = useState('')
-    const [trigger , setTrigger] = useState(false)
+    const [search, setSearch] = useState('')
+    const [trigger, setTrigger] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -33,71 +33,78 @@ const BookList = () => {
 
     }, [trigger]);
 
-    async function deleteBook(id){
+    async function deleteBook(id) {
         try {
             const response = await fetch(`https://64f036cc8a8b66ecf7794817.mockapi.io/books/${id}`, {
                 method: "DELETE",
-        })
-        setTrigger(!trigger)
-        toast.success('Removed successfully')
+            })
+            setTrigger(!trigger)
+            toast.success('Removed successfully')
         } catch (error) {
             toast.error("Error in Deleting Books")
         }
 
     }
 
-    function addBook(){
+    function addBook() {
         navigate('/add_book')
     }
     return (
-        <div>
+        <div className='book_lists'>
             <PageLayout>
-            <input placeholder='search for Book/Author' value={search} onChange={(e)=> setSearch(e.target.value)} className='search-box'/>
+                <input placeholder='search for Book/Author' value={search} onChange={(e) => setSearch(e.target.value)} className='search-box' />
 
-            <button className='btn btn-primary' onClick={addBook}>ADD BOOKS</button>
+                <button className='btn btn-primary' onClick={addBook}>ADD BOOKS</button>
 
-            <div className='card-container'>
-                {
-                    books ? (
-                        books.filter(item => {
-                            if (search === '') {
-                                return item
-                            } else if (item.name.toLowerCase().includes(search.toLowerCase())) {
-                                return item
-                            }
-                            else if (item.author?.toLowerCase().includes(search.toLowerCase())) {
-                                return item
-                            }
-                        })
-                        
-                            .map((i) => {
-                                return (
+                <div className='card-container'>
+                    {
+                        books ? (
+                            books.filter(item => {
+                                if (search === '') {
+                                    return item
+                                } else if (item.name.toLowerCase().includes(search.toLowerCase())) {
+                                    return item
+                                }
+                                else if (item.author?.toLowerCase().includes(search.toLowerCase())) {
+                                    return item
+                                }
+                            })
 
-                            <div className="card">
-                                <img className="card-img-top" src={require("../routes/bookImage.jpeg")} alt="books" />
-                                <div className="card-body">
-                                    <h5 className="card-title">{i.name}</h5>
-                                    <p>Author: {i.author}</p>
+                                .map((i) => {
+                                    return (
 
-                                    {
+                                        <div className="card">
+                                            <img className="card-img-top" src={require("../routes/bookImage.jpeg")} alt="books" />
+                                            <div className="card-body">
+                                                <h5 className="card-title">{i.name.toUpperCase()}</h5>
+                                                <p>Author: {i.author}</p>
+
+                                                {/* {
                                         i.status ? (<button className='btn btn-success'>Available</button>) : (<button className='btn btn-danger'>N/A</button>)
                                     }
 
-                                    <button className='btn btn-danger m-2' onClick={()=>deleteBook(i.id)}><DeleteIcon/></button>
+                                    <button className='btn btn-danger m-2' onClick={()=>deleteBook(i.id)}><DeleteIcon/></button> */}
 
-                                </div>
-                            </div>
+                                            </div>
+                                            <div className='card-footer'>
+                                                {
+                                                    i.status ? (<button className='btn btn-success'>Available</button>) : (<button className='btn btn-danger'>N/A</button>)
+                                                }
 
-                            )
-                            }
-                            )
+                                                <button className='btn btn-danger m-2' onClick={() => deleteBook(i.id)}><DeleteIcon /></button>
+                                            </div>
+                                        </div>
 
-                    ) : (
-                        <p>loading...</p>
-                    )
-                }
+                                    )
+                                }
+                                )
 
-</div>
+                        ) : (
+                            <p>loading...</p>
+                        )
+                    }
+
+                </div>
             </PageLayout>
         </div>
     )
